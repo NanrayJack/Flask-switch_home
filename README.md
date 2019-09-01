@@ -32,7 +32,7 @@ url: https://www.chenyehong.com,
 ---
 - 板块:
     - 寄宿信息平台:
-         - ![](/img-show/board_post.png)
+        - ![](/img-show/board_post.png)
     - 交流社区: 
         - ![](/img-show/board_topic.png)
 - 用户模块:
