@@ -30,13 +30,13 @@ url: https://www.chenyehong.com,
 
 功能演示
 ---
-- 用户模块:
-    - ![](/img-show/user_module.gif)
 - 板块:
     - 寄宿信息平台:
          - ![](/img-show/board_post.png)
     - 交流社区: 
         - ![](/img-show/board_topic.png)
+- 用户模块:
+    - ![](/img-show/user_module.gif)
 - 排序:
     - ![](/img-show/sort.gif)
 - 标签检索:
