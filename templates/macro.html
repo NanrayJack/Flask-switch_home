@@ -1,0 +1,139 @@
+{% macro sh_platform(posts) -%}
+    <div class="sh-platform sh-border-color-transform">
+        <div id="sh-platform-header" class="sh-platform-header sh-header sh-background-color-transform">
+            <h5 class="card-title">寄宿信息平台</h5>
+        </div>
+        <div id="sh-platform-posts" class="posts">
+            {% for p in posts %}
+                <div class="sh-post sh-background-color-transform" onclick=window.location.href='/topic/{{ p.id }}'>
+                    <div class="card sh-card" style="width: 18rem;">
+                        <div id="id-sh-card-img">
+                            <img style="min-width: 288px; width: auto; height: 100%;" src='{{ p.cover_compressed }}' class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ p.title }}</h5>
+                            <p class="card-text">{{ p.content | summary }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">{{ p.user().city() }}</small>
+                            <small class="text-muted">-- {{ p.user().role_name() | identity }}</small>
+                            <small class="text-muted">-- {{ p.user().username}}</small>
+                            <br>
+                            <small class="text-muted">{{ p.created_time | format_time }}</small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% if posts | length == 8 %}
+                {# 假如只有 8 个, 说明是在 index 主页, 那么就给一个 更多卡片 #}
+                <div class="sh-post sh-background-color-transform" onclick=window.location.href='/post'>
+                    <div class="card sh-card" style="width: 18rem;">
+
+                        <div id="id-sh-card-img">
+                            <img style="width: auto; height: 100%;" src='/static/img/house/h1.jpg' class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">更多</h5>
+                            <p class="card-text">{{ '............................................................' | summary }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">...</small>
+                            <small class="text-muted">-- ...</small>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{%- endmacro %}
+
+{% macro sh_community(parent_topics, child_topics) -%}
+    <div class="sh-community-container">
+        <div id="community-parents">
+            <div id="sh-parent-header" class="sh-header header sh-background-color-transform">
+                <h5 class="card-title">父母社区</h5>
+            </div>
+
+            <div class="panel">
+                <div id="topic_list">
+                    {% for t in parent_topics %}
+                        <div class="cell">
+                            <a class="user_avatar pull-left" href="/user/atian25">
+                                <img src="{{ t.user().image }}" title="atian25">
+                            </a>
+                            <span class="reply_count pull-left">
+                                  <span class="count_of_replies" title="回复数">
+                                     {{ t.replies() | count }}
+                                  </span>
+                                  <span class="count_seperator">/</span>
+                                  <span class="count_of_visits" title="点击数">
+                                     {{ t.views }}
+                                  </span>
+                                  </span>
+                            <a class="last_time pull-right" href="/topic/5cbfd9aca86ae80ce64b3175#5d544129697873456c6bd629">
+                                <img class="user_small_avatar" src="{{ t.user().image }}">
+                                <span class="last_active_time">{{ t.updated_time | format_time }}</span>
+                            </a>
+                            <div class="topic_title_wrapper">
+                                <span class="put_top">置顶</span>
+                                <a style="overflow: visible;" class="topic_title" href="{{ url_for('topic.detail', id=t.id) }}">
+                                    {{ t.title | topic_summary}}
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="cell">
+                        <div class="topic_title_wrapper">
+                            <a style="overflow: visible;" class="topic_title" href="{{ url_for('topic.index') }}">
+                                更多...
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="community-children">
+            <div id="sh-child-header" class="sh-header header sh-background-color-transform">
+                <h5 class="card-title">学生社区</h5>
+            </div>
+
+            <div class="panel">
+                <div id="topic_list">
+                    {% for t in child_topics %}
+                        <div class="cell">
+                            <a class="user_avatar pull-left" href="/user/{{ t.user().id }}">
+                                <img src="{{ t.user().image }}" title="atian25">
+                            </a>
+                            <span class="reply_count pull-left">
+                                  <span class="count_of_replies" title="回复数">
+                                     {{ t.replies() | count }}
+                                  </span>
+                                  <span class="count_seperator">/</span>
+                                  <span class="count_of_visits" title="点击数">
+                                     {{ t.views }}
+                                  </span>
+                                  </span>
+                            <a class="last_time pull-right" href="/user/{{ t.user().id }}">
+                                <img class="user_small_avatar" src="{{ t.user().image }}">
+                                <span class="last_active_time">{{ t.created_time | format_time }}</span>
+                            </a>
+                            <div class="topic_title_wrapper">
+                                <span class="put_top">置顶</span>
+                                <a style="overflow: visible;" class="topic_title" href="{{ url_for('topic.detail', id=t.id) }}">
+                                    {{ t.title | topic_summary }}
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="cell">
+                        <div class="topic_title_wrapper">
+                            <a style="overflow: visible;" class="topic_title" href="{{ url_for('topic.index') }}">
+                                更多...
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endmacro %}
