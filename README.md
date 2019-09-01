@@ -4,9 +4,9 @@ switch-home-full-stack
 
 体验
 ---
-url: https://www.chenyehong.com, 
-    - 无需登录即为游客
-    
+- url: https://www.chenyehong.com
+- 无需登录即为游客
+- 动图加载比较慢
 
 主要功能
 ---
