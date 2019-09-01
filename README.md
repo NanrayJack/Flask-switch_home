@@ -31,7 +31,7 @@ url: https://www.chenyehong.com,
 功能演示
 ---
 - 用户模块:
-    - 
+    - ![](/img-show/board_post.png)
 - 板块:
     - 
 - 排序:
